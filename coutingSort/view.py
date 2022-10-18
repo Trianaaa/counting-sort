@@ -23,12 +23,12 @@ mainWindow.iconbitmap('icon.ico')
 mainFrame=tk.Frame(mainWindow,bg="lightsteelblue2")
 frameTitle=tk.Frame(mainWindow, bg="lightsteelblue3")
 
-fig = Figure(figsize=(5, 4), dpi=100)
-plt.plot(label='Counting Sort\nComplejidad= O(n+k)')
-plt.title('Time VS Number of items ordered')
-plt.ylabel('Time (s)')
-plt.xlabel('Number of items ordered')
-plt.grid()
+# fig = Figure(figsize=(5, 4), dpi=100)
+# plt.plot(label='Counting Sort\nComplejidad= O(n+k)')
+# plt.title('Time VS Number of items ordered')
+# plt.ylabel('Time (s)')
+# plt.xlabel('Number of items ordered')
+# plt.grid()
 
 #Crea la ventana Generalidades
 def ventanaGen():
