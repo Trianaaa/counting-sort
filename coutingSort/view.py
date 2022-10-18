@@ -10,6 +10,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolb
 from matplotlib.figure import Figure
 import numpy as np
 import matplotlib.pyplot as plt
+import index
 
 #archivo para que funcione la evaluacion de gramaticas segun la TAS
 cmd='python index.py'
@@ -96,9 +97,38 @@ def ventanaDem():
     btn4=tk.Button(ventanaDemo, text="Volver", padx=10, pady=5, fg="black", bg="lightsteelblue3", font=('Consolas', 10), command=ventanaDemo.destroy)
     btn4.place(x=715,y=15)
 
-    canvas = FigureCanvasTkAgg(fig, master=ventanaDemo)  # CREAR AREA DE DIBUJO DE TKINTER.
-    canvas.draw()
-    canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
+    initial_label = tk.Label(ventanaDemo,text="Enter the number of random numbers for the first iteration:")
+    initial_label.pack()
+    initial = tk.Entry(ventanaDemo)
+    initial.pack()
+    increase_label = tk.Label(ventanaDemo, text="Enter the number of random numbers that is incremented by between iterations:")
+    increase_label.pack()
+    increase = tk.Entry(ventanaDemo)
+    increase.pack()
+    iterations_label = tk.Label(ventanaDemo,text="Enter the number of iterations to perform:")
+    iterations_label.pack()
+    iterations = tk.Entry(ventanaDemo)
+    iterations.pack()
+
+    def ejecutar(initial,iterations,increase):
+        # print('hola')
+        arrays_unsorted= index.random_Array(initial,iterations,increase)
+        index.sort_arrays_unsorted_show_table(arrays_unsorted)
+
+    def ejecutar2(initial,iterations,increase):
+        # print('hola')
+        arrays_unsorted= index.random_Array(initial,iterations,increase)
+        index.sort_arrays_unsorted_show_graphic(arrays_unsorted)
+
+
+    ejecutar_btn = tk.Button(ventanaDemo,text='Mostrar tabla', command=lambda: ejecutar(int(initial.get()),int(iterations.get()),int(increase.get())))
+    ejecutar_btn.pack()
+    ejecutar_btn = tk.Button(ventanaDemo,text='Mostrar graficos', command=lambda: ejecutar2(int(initial.get()),int(iterations.get()),int(increase.get())))
+    ejecutar_btn.pack()
+
+    # canvas = FigureCanvasTkAgg(fig, master=ventanaDemo)  # CREAR AREA DE DIBUJO DE TKINTER.
+    # canvas.draw()
+    # canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
 
 #Funcion para la configuracion de la ventana Principal
 def mainWindowConfig():

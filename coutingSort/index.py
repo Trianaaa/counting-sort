@@ -4,10 +4,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import time
+import table
 
-initial = int(input("\nEnter the number of random numbers for the first iteration:"))
-increase = int(input("\nEnter the number of random numbers that is incremented by between iterations:"))
-iterations = int(input("\nEnter the number of iterations to perform:"))
+# initial = int(input("\nEnter the number of random numbers for the first iteration:"))
+# increase = int(input("\nEnter the number of random numbers that is incremented by between iterations:"))
+# iterations = int(input("\nEnter the number of iterations to perform:"))
 
 def countingSort(collection):
     if collection == []:
@@ -34,12 +35,12 @@ def countingSort(collection):
 
     return ordered
 
-def generate_graphic(ejex,ejey):
+def grafica(ejex,ejey):
     plt.figure(figsize=(8,8))
-    plt.plot(ejex,ejey, label='Counting Sort\nComplejidad= O(n+k)')
-    plt.ylabel('Time (s)')
-    plt.xlabel('Number of items ordered')
-    plt.title('Time VS Number of items ordered')
+    plt.plot(ejex,ejey,label='Grafica')
+    plt.ylabel('Tiempo (s)')
+    plt.xlabel('Elementos Ordenados')
+    plt.title('T VS E')
     plt.legend()
     plt.grid()
     plt.show()
@@ -69,11 +70,12 @@ def random_Array(initial,iterations,increase):
     return arrays_unsorted
 
 def generate_data_table(count,longitud, tiempo):
-    time_ejecutions = pd.DataFrame({'Num': count,'Quantity of elements':longitud,'Execution time':tiempo})
-    print(time_ejecutions)
-    return time_ejecutions
+    table.tableShow(count,longitud, tiempo)
+    # # time_ejecutions = pd.DataFrame({'Num': count,'Quantity of elements':longitud,'Execution time':tiempo})
+    # # print(time_ejecutions)
+    # return time_ejecutions
 
-def sort_arrays_unsorted(array_de_arrays):
+def sort_arrays_unsorted_show_table(array_de_arrays):
     array_count = []
     array_length = []
     array_time =[]
@@ -94,12 +96,38 @@ def sort_arrays_unsorted(array_de_arrays):
         array_time.append(tiempo)
         arrays_sorted.append(sorted)
         count = count + 1
-    tabla_datos = generate_data_table(array_count,array_length,array_time)
-    generate_graphic(array_length,array_time)
+    generate_data_table(array_count,array_length,array_time)
     
     count = count + 1
     
     return arrays_sorted    
 
-arrays_unsorted= random_Array(initial,iterations,increase)
-arrays_sorted = sort_arrays_unsorted(arrays_unsorted)
+def sort_arrays_unsorted_show_graphic(array_de_arrays):
+    array_count = []
+    array_length = []
+    array_time =[]
+    arrays_sorted = []
+    count = 1
+    for i in array_de_arrays:
+        
+        start = time.time()
+        sorted = countingSort(i)
+        end = time.time()
+        
+        tiempo = end - start
+        longitud = len(sorted)
+        
+        
+        array_count.append(count)
+        array_length.append(longitud)
+        array_time.append(tiempo)
+        arrays_sorted.append(sorted)
+        count = count + 1
+    grafica(array_length,array_time)
+    
+    count = count + 1
+    
+    return arrays_sorted  
+
+# arrays_unsorted= random_Array(initial,iterations,increase)
+# arrays_sorted = sort_arrays_unsorted(arrays_unsorted)
